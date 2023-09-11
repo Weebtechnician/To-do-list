@@ -1,0 +1,31 @@
+<%- include("partials/header") %>
+<section id="main">
+    <div class="todo container">
+        <h1>To-do</h1>
+        <div class="create-todo">
+        <form action="/submit" method="POST">
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control" id="add-todo" name="todo" placeholder="Add todo" aria-describedby="inputGroup-sizing-sm">
+                <button class="btn btn-primary btn-sm" type="submit">Add todo</button>
+            </div>
+        </form>
+        </div>
+        <div class="todo-list">
+        <ul id="todo-list-container" class="list-group">
+            <% todos.forEach((todo, index) => { %>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" id="todo<%= index %>" name="todo<%= index %>" value="<%= index %>">
+                <label class="form-check-label" for="todo<%= index %>">
+                    <span id="todoText<%= index %>"><%= todo %></span>
+                </label>
+                <form action="/delete" method="POST" style="display: inline;">
+                    <input type="hidden" name="index" value="<%= index %>">
+                    <button class="btn btn-outline-danger btn-md" type="submit"><i class="bi bi-trash" style="font-size: 1rem"></i></button>
+                </form>
+            </li>
+            <% }) %>
+        </ul>
+        </div> 
+    </div>
+</section>
+<%- include("partials/footer") %>

@@ -1,0 +1,32 @@
+<%- include("partials/header") %>
+<section id="main">
+    <div class="todo container">
+        <h1>Work To-dos</h1>
+        <div class="create-todo">
+        <form action="/work/submit" method="POST">
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control" id="add-workTodo" name="workTodo" placeholder="Add todo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                <button class="btn btn-primary btn-sm" type="submit">Add todo</button>
+              </div>
+        </form>
+        </div>
+        <div class="todo-list">
+        <ul id="todo-list-work-container" class="list-group">
+            <% workTodos.forEach((workTodo, workIndex) => { %>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" id="workTodo<%= workIndex %>" name="workTodo<%= workIndex %>" value="<%= workIndex %>">
+                <label class="form-check-label" for="workTodo<%= workIndex %>">
+                    <span id="workTodoText<%= workIndex %>"><%= workTodo %></span>
+                </label>
+                <form action="/work/delete" method="POST" style="display: inline;">
+                    <input type="hidden" name="workIndex" value="<%= workIndex %>">
+                    <button class="btn btn-outline-danger btn-md" type="submit"><i class="bi bi-trash" style="font-size: 1rem"></i></button>
+                </form>
+            </li>
+            <% }) %>
+        </ul>
+        </div>
+    </div>
+</section>
+
+<%- include("partials/footer") %>
